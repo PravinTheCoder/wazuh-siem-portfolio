@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazuh SIEM Home Lab | SOC L1 Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .overview-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .overview-card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 10px 0;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-top: 4px solid #667eea;
+        }
+
+        .skill-category h4 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateX(5px);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .metric-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .img-caption {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .step {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Wazuh SIEM Home Lab</h1>
+            <p class="subtitle">SOC Level 1 Portfolio Project</p>
+            <div class="badges">
+                <span class="badge">SIEM Deployment</span>
+                <span class="badge">Security Monitoring</span>
+                <span class="badge">Threat Detection</span>
+                <span class="badge">Incident Response</span>
+            </div>
+        </header>
+
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>🎯 Project Goal</h3>
+                <p>Deploy enterprise-grade SIEM solution for centralized security monitoring and threat detection</p>
+            </div>
+            <div class="overview-card">
+                <h3>🔧 Technology Stack</h3>
+                <p>Wazuh 4.14.1, Ubuntu Desktop, Windows 10, VirtualBox</p>
+            </div>
+            <div class="overview-card">
+                <h3>⏱️ Duration</h3>
+                <p class="stat-number">8hrs</p>
+                <p>Setup, Configuration & Testing</p>
+            </div>
+            <div class="overview-card">
+                <h3>✅ Status</h3>
+                <p class="stat-number">100%</p>
+                <p>Completed Successfully</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 Lab Architecture</h2>
+            <div class="info-box">
+                <h4 style="color: #2196F3; margin-bottom: 10px;">Environment Setup</h4>
+                <ul>
+                    <li><strong>Wazuh Manager:</strong> Ubuntu Desktop (IP: 10.0.2.15, Port: 443)</li>
+                    <li><strong>Endpoint:</strong> Windows 10 Home (IP: 192.168.1.8, Agent ID: 001)</li>
+                    <li><strong>Virtualization:</strong> Oracle VirtualBox</li>
+                    <li><strong>Network:</strong> Internal network with NAT</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🚀 Implementation Steps</h2>
+
+            <div class="step">
+                <h3><span class="step-number">1</span>Wazuh Manager Installation</h3>
+                <p>Started by accessing the official Wazuh documentation to get the installation command.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot7.png" alt="Wazuh Documentation - Quickstart Guide">
+                <p class="img-caption">Wazuh Documentation - Quickstart page with installation instructions</p>
+                <p><strong>Installation Command:</strong></p>
+                <div class="code-block">curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a</div>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot8.png" alt="Terminal Installation Progress">
+                <p class="img-caption">Terminal showing installation progress - dependencies and configuration</p>
+                <div class="success-box">
+                    <strong>✓ Installation Completed Successfully</strong>
+                    <p style="margin-top: 10px;">The script automatically installed all components: Wazuh Manager, Indexer, and Dashboard with credentials displayed at the end.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span>Accessing Wazuh Dashboard</h3>
+                <p>Logged into the Wazuh web interface using the credentials from installation.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot6.png" alt="Wazuh Login Page">
+                <p class="img-caption">Wazuh Login Interface - The Open Source Security Platform</p>
+                <div class="info-box">
+                    <strong>Login Credentials:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Username: admin</li>
+                        <li>Password: (generated during installation)</li>
+                    </ul>
+                </div>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot5.png" alt="Dashboard Overview Initial State">
+                <p class="img-caption">Dashboard Overview - Initial state before agent deployment</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3</span>Viewing Agents Page</h3>
+                <p>Navigated to the Endpoints section to prepare for agent deployment.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot2.png" alt="Endpoints Page Agent Summary">
+                <p class="img-caption">Endpoints page showing agent summary and registered WIN-10 agent</p>
+                <p><strong>Agent Status Summary:</strong> Active (1), Disconnected (0), Pending (0), Never connected (0)</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">4</span>Deploying Windows Agent</h3>
+                <p>Installed Wazuh agent on Windows 10 VM using PowerShell.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot4.png" alt="Agent Deployment Split Screen">
+                <p class="img-caption">Split screen: PowerShell agent installation (left) and Wazuh dashboard (right)</p>
+                <p><strong>PowerShell Installation Command:</strong></p>
+                <div class="code-block">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.1-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER="192.168.1.3" WAZUH_AGENT_NAME="WIN10"</div>
+                <div class="success-box">
+                    <strong>✓ Agent Registered Successfully</strong>
+                    <p style="margin-top: 10px;"><strong>Agent Details:</strong></p>
+                    <ul style="margin-top: 5px;">
+                        <li>ID: 001</li>
+                        <li>Name: WIN-10</li>
+                        <li>IP: 192.168.1.8</li>
+                        <li>OS: Microsoft Windows 10 Home 10.0.19045.2965</li>
+                        <li>Status: Active ✓</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">5</span>Agent System Inventory</h3>
+                <p>Viewed detailed agent information including hardware specifications and configuration.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Agent Details Page">
+                <p class="img-caption">Agent Details - WIN-10 system inventory and monitoring modules</p>
+                <div class="info-box">
+                    <strong>System Specifications:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>CPU:</strong> AMD Ryzen 5 7235HS</li>
+                        <li><strong>Cores:</strong> 2</li>
+                        <li><strong>Memory:</strong> 6GB</li>
+                        <li><strong>Host Name:</strong> WIN-10</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">6</span>Monitoring Security Events</h3>
+                <p>Analyzed security events and threat patterns using the dashboard.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Events Count Evolution Chart">
+                <p class="img-caption">Events Count Evolution - Timeline showing security event patterns</p>
+                <div class="info-box">
+                    <strong>MITRE ATT&CK Integration - Top Tactics:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Defense Evasion: 8 occurrences</li>
+                        <li>Impact: 3 occurrences</li>
+                        <li>Persistence: 3 occurrences</li>
+                        <li>Privilege Escalation: 3 occurrences</li>
+                    </ul>
+                </div>
+                <div class="info-box" style="margin-top: 15px;">
+                    <strong>PCI DSS Compliance Monitoring:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Requirement 11.5: 7 events</li>
+                        <li>Requirement 10.6.1: 6 events</li>
+                        <li>Requirement 10.2.6: 5 events</li>
+                        <li>Requirement 10.2.5: 3 events</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">7</span>File Integrity Monitoring</h3>
+                <p>Tested FIM capabilities by creating and deleting files on the Windows endpoint.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot3.png" alt="File Integrity Monitoring Events">
+                <p class="img-caption">File Integrity Monitoring - Events table showing file operations (added/deleted)</p>
+                <div class="success-box">
+                    <strong>FIM Test Results - 7 Events Detected:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>File Added:</strong> helloworld.txt (Rule ID: 554, Level: 5)</li>
+                        <li><strong>File Deleted:</strong> new text document.txt (Rule ID: 553, Level: 7)</li>
+                        <li><strong>Test Path:</strong> c:\users\unkno\desktop\hackers\</li>
+                        <li><strong>Detection Time:</strong> Real-time (Jan 13, 2026 @ 00:22:47)</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 15px;"><strong>Use Cases Demonstrated:</strong> Detecting unauthorized modifications, malware file creation, configuration changes, and meeting compliance requirements.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">8</span>Vulnerability Detection</h3>
+                <p>Identified security vulnerabilities on the monitored endpoint.</p>
+                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Vulnerability Detection Module">
+                <p class="img-caption">Vulnerability Detection - Critical vulnerabilities identified on endpoint</p>
+                <div class="warning-box">
+                    <strong>⚠️ Vulnerability Scan Results:</strong>
+                    <p style="margin-top: 10px;">22 Critical vulnerabilities detected requiring attention. This module continuously scans for outdated software, known CVEs, missing patches, and vulnerable applications.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 Skills Demonstrated</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>🔧 Technical Skills</h4>
+                    <div class="skill-item">SIEM Deployment & Configuration</div>
+                    <div class="skill-item">Agent Management</div>
+                    <div class="skill-item">Linux System Administration</div>
+                    <div class="skill-item">Windows PowerShell</div>
+                    <div class="skill-item">Network Configuration</div>
+                </div>
+                <div class="skill-category">
+                    <h4>🛡️ Security Skills</h4>
+                    <div class="skill-item">Log Analysis</div>
+                    <div class="skill-item">File Integrity Monitoring</div>
+                    <div class="skill-item">Vulnerability Management</div>
+                    <div class="skill-item">Threat Detection</div>
+                    <div class="skill-item">Compliance Monitoring</div>
+                </div>
+                <div class="skill-category">
+                    <h4>📊 Analytical Skills</h4>
+                    <div class="skill-item">Event Correlation</div>
+                    <div class="skill-item">Pattern Recognition</div>
+                    <div class="skill-item">Incident Investigation</div>
+                    <div class="skill-item">Risk Assessment</div>
+                    <div class="skill-item">MITRE ATT&CK Mapping</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📈 Project Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">327</div>
+                    <div class="metric-label">Security Events Analyzed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">22</div>
+                    <div class="metric-label">Critical Vulnerabilities</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">7</div>
+                    <div class="metric-label">FIM Events Tracked</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4</div>
+                    <div class="metric-label">MITRE ATT&CK Tactics</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">24</div>
+                    <div class="metric-label">Compliance Events</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Uptime Achieved</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎓 Key Achievements</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">✓ Enterprise SIEM Deployment</h4>
+                    <p>Successfully deployed and configured Wazuh on Ubuntu Desktop with all components functional</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">✓ Centralized Monitoring</h4>
+                    <p>Established centralized security monitoring for Windows endpoints with real-time event collection</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">✓ File Integrity Monitoring</h4>
+                    <p>Implemented and tested FIM capabilities with real-time alerting on file system changes</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">✓ Threat Intelligence Integration</h4>
+                    <p>Mapped security events to MITRE ATT&CK framework for threat categorization</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #667eea;">✓ Compliance & Vulnerability Management</h4>
+                    <p>Enabled PCI DSS compliance monitoring and vulnerability detection across endpoints</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🚀 Future Enhancements</h2>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <h3>📱 Multi-Platform</h3>
+                    <p>Deploy agents on Linux (Ubuntu, CentOS) and additional Windows systems</p>
+                </div>
+                <div class="overview-card">
+                    <h3>🔍 Custom Rules</h3>
+                    <p>Create detection rules for specific attack patterns and behaviors</p>
+                </div>
+                <div class="overview-card">
+                    <h3>⚡ Active Response</h3>
+                    <p>Configure automated threat blocking and remediation actions</p>
+                </div>
+                <div class="overview-card">
+                    <h3>🌐 Log Integration</h3>
+                    <p>Add firewall, web server, and database logs for comprehensive monitoring</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h2 style="margin-bottom: 15px;">📫 Get In Touch</h2>
+            <p style="color: #666; margin-bottom: 20px;">Interested in discussing this project or cybersecurity opportunities?</p>
+            <div class="contact-links">
+                <a href="https://github.com/yourusername" class="contact-btn">GitHub</a>
+                <a href="https://linkedin.com/in/yourprofile" class="contact-btn">LinkedIn</a>
+                <a href="mailto:your.email@example.com" class="contact-btn">Email</a>
+            </div>
+            <p style="margin-top: 30px; color: #999; font-size: 0.9em;">
+                Project Completed: January 12-13, 2026 | Duration: ~8 hours
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
