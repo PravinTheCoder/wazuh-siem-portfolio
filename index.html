@@ -410,11 +410,11 @@
             <div class="step">
                 <h3><span class="step-number">1</span>Wazuh Manager Installation</h3>
                 <p>Started by accessing the official Wazuh documentation to get the installation command.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot7.png" alt="Wazuh Documentation - Quickstart Guide">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot7.png" alt="Wazuh Documentation - Quickstart Guide">
                 <p class="img-caption">Wazuh Documentation - Quickstart page with installation instructions</p>
                 <p><strong>Installation Command:</strong></p>
                 <div class="code-block">curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a</div>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot8.png" alt="Terminal Installation Progress">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot8.png" alt="Terminal Installation Progress">
                 <p class="img-caption">Terminal showing installation progress - dependencies and configuration</p>
                 <div class="success-box">
                     <strong>✓ Installation Completed Successfully</strong>
@@ -425,7 +425,7 @@
             <div class="step">
                 <h3><span class="step-number">2</span>Accessing Wazuh Dashboard</h3>
                 <p>Logged into the Wazuh web interface using the credentials from installation.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot6.png" alt="Wazuh Login Page">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot6.png" alt="Wazuh Login Page">
                 <p class="img-caption">Wazuh Login Interface - The Open Source Security Platform</p>
                 <div class="info-box">
                     <strong>Login Credentials:</strong>
@@ -434,14 +434,14 @@
                         <li>Password: (generated during installation)</li>
                     </ul>
                 </div>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot5.png" alt="Dashboard Overview Initial State">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot5.png" alt="Dashboard Overview Initial State">
                 <p class="img-caption">Dashboard Overview - Initial state before agent deployment</p>
             </div>
 
             <div class="step">
                 <h3><span class="step-number">3</span>Viewing Agents Page</h3>
                 <p>Navigated to the Endpoints section to prepare for agent deployment.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot2.png" alt="Endpoints Page Agent Summary">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot2.png" alt="Endpoints Page Agent Summary">
                 <p class="img-caption">Endpoints page showing agent summary and registered WIN-10 agent</p>
                 <p><strong>Agent Status Summary:</strong> Active (1), Disconnected (0), Pending (0), Never connected (0)</p>
             </div>
@@ -449,7 +449,7 @@
             <div class="step">
                 <h3><span class="step-number">4</span>Deploying Windows Agent</h3>
                 <p>Installed Wazuh agent on Windows 10 VM using PowerShell.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot4.png" alt="Agent Deployment Split Screen">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot4.png" alt="Agent Deployment Split Screen">
                 <p class="img-caption">Split screen: PowerShell agent installation (left) and Wazuh dashboard (right)</p>
                 <p><strong>PowerShell Installation Command:</strong></p>
                 <div class="code-block">Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.1-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER="192.168.1.3" WAZUH_AGENT_NAME="WIN10"</div>
@@ -469,7 +469,7 @@
             <div class="step">
                 <h3><span class="step-number">5</span>Agent System Inventory</h3>
                 <p>Viewed detailed agent information including hardware specifications and configuration.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Agent Details Page">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Agent Details Page">
                 <p class="img-caption">Agent Details - WIN-10 system inventory and monitoring modules</p>
                 <div class="info-box">
                     <strong>System Specifications:</strong>
@@ -485,7 +485,7 @@
             <div class="step">
                 <h3><span class="step-number">6</span>Monitoring Security Events</h3>
                 <p>Analyzed security events and threat patterns using the dashboard.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Events Count Evolution Chart">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Events Count Evolution Chart">
                 <p class="img-caption">Events Count Evolution - Timeline showing security event patterns</p>
                 <div class="info-box">
                     <strong>MITRE ATT&CK Integration - Top Tactics:</strong>
@@ -510,7 +510,7 @@
             <div class="step">
                 <h3><span class="step-number">7</span>File Integrity Monitoring</h3>
                 <p>Tested FIM capabilities by creating and deleting files on the Windows endpoint.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot3.png" alt="File Integrity Monitoring Events">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot3.png" alt="File Integrity Monitoring Events">
                 <p class="img-caption">File Integrity Monitoring - Events table showing file operations (added/deleted)</p>
                 <div class="success-box">
                     <strong>FIM Test Results - 7 Events Detected:</strong>
@@ -527,7 +527,7 @@
             <div class="step">
                 <h3><span class="step-number">8</span>Vulnerability Detection</h3>
                 <p>Identified security vulnerabilities on the monitored endpoint.</p>
-                <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Vulnerability Detection Module">
+                <img src="https://raw.githubusercontent.com/PravinTheCoder/wazuh-siem-portfolio/main/images/screenshot1.png" alt="Vulnerability Detection Module">
                 <p class="img-caption">Vulnerability Detection - Critical vulnerabilities identified on endpoint</p>
                 <div class="warning-box">
                     <strong>⚠️ Vulnerability Scan Results:</strong>
@@ -648,9 +648,9 @@
             <h2 style="margin-bottom: 15px;">📫 Get In Touch</h2>
             <p style="color: #666; margin-bottom: 20px;">Interested in discussing this project or cybersecurity opportunities?</p>
             <div class="contact-links">
-                <a href="https://github.com/yourusername" class="contact-btn">GitHub</a>
-                <a href="https://linkedin.com/in/yourprofile" class="contact-btn">LinkedIn</a>
-                <a href="mailto:your.email@example.com" class="contact-btn">Email</a>
+                <a href="https://github.com/PravinTheCoder" class="contact-btn">GitHub</a>
+                <a href="https://linkedin.com/in/pravin-s-575102252" class="contact-btn">LinkedIn</a>
+                <a href="mailto:pravinthecoder2005@gmail.com" class="contact-btn">Email</a>
             </div>
             <p style="margin-top: 30px; color: #999; font-size: 0.9em;">
                 Project Completed: January 12-13, 2026 | Duration: ~8 hours
