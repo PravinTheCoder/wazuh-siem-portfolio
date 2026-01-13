@@ -1,12 +1,12 @@
 # Wazuh SIEM Home Lab Portfolio
 
-![Portfolio Banner](images/screenshot1.png)
-
 ## 🎯 Project Overview
 
 This project demonstrates the deployment and configuration of Wazuh, an open-source SIEM platform, in a home lab environment. The setup includes centralized security monitoring, threat detection, and incident response capabilities.
 
 As a aspiring SOC Analyst it is very helpful to play with this and learn more about SIEM Topics in a safe environment.
+
+![Portfolio Banner](images/screenshot1.png)
 
 ## 🔗 Live Portfolio
 
